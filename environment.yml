@@ -4,7 +4,7 @@ channels:
 dependencies:
   - tqdm
   - jupyterlab
-  - geopandas
+  - geopandas==0.12.2
   - bokeh
   - pip
   - pip:
