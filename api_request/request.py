@@ -120,12 +120,12 @@ class GetNodeWay:
         
         Parameters
         ----------
-        bbox (list): [
+        bbox (tuple): (
                             min lat, 
                             min lon, 
                             max lat, 
                             max lon
-                    ]
+                      )
         tags (list): List of OSM key/value tags 
         positive_codes (list): List of valid results code
         
@@ -226,12 +226,12 @@ def bbox_from_poly(poly):
     
     Return
     ------
-    bbox (list): [
+    bbox (tuple): (
                     min lat, 
                     min lon, 
                     max lat, 
                     max lon
-                 ]
+                  )
     """
     bbox = poly.exterior.xy
     bbox = (
