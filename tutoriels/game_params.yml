@@ -1,0 +1,9 @@
+url: "https://fr.wikipedia.org/wiki/"
+ranges:
+    x: [-284221, -277648]
+    y: [5987515, 5992714]
+buffer_value: 200
+csv:
+    file: "game_QA.csv"
+    sep: ";" 
+nb_questions: 2

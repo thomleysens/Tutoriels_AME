@@ -1,10 +1,11 @@
 name: tutoriels_AME
 channels:
-  - defaults
+  - conda-forge
 dependencies:
   - tqdm
+  - panel
   - jupyterlab
-  - geopandas==0.12.2
+  - geopandas
   - bokeh
   - pip
   - pip:
