@@ -1,9 +1,16 @@
-question;answer;hint;x;y;wikidata
-"My eye, when opened, can save the ships. Who am I ?";"Phare du Tréhic";"Search in the North"; -2.5237039;47.3082191;"Q20971192"
-"If you break your leg, you go to ?";"Ancien hôpital du Croisic";"Search for the red circle with a cross";-2.51493;47.29183;"Q21418896"
-"I've got wheat and I want flour, where do I have to go ?";"Moulin de Beauvran";"Search near south of Laboratoire de biologie marine";-2.5179617;47.2855275;"Q21152416"
-"I'm BotMan, where do I park my Botmobile ?";"Manoir de Kervaudu";"It is a manor surrounded by green areas";-2.5263980;47.2964274;"Q3286209"
-"Sorry but I have to catch my train, meet me there !";"Le Croisic";"You really need a hint ?!! Are you kidding ???";-2.5072926;47.2898655;"Q657183"
-"Call Obélix if you want to move it. Where is it ?";"Pierre Longue";"A camping site is named after me";-2.5307876;47.2873867;"Q3305917"
-"Find an ancient guardhouse (the highest point of Le Croisic)";"La Vigie de la Romaine";"Search in the south";-2.5352891;47.2892059;"Q21294459"
-"I'm a robot, I believe only in The Great Linux, but I love to admire the architecture of this worship place, where am I ?";"Église Notre-Dame de Pitié";"Search for a cross";-2.5132206;47.2944387;"Q3580230"
+question;answer;hint;x;y;wikidata;url
+My eye, when opened, can save the ships. Who am I ?;Phare du Tréhic;Search in the North;-2.5237039;47.3082191;Q20971192;https://fr.wikipedia.org/wiki/Phare_du_Tr%C3%A9hic
+If you break your leg, where do you go ?;Ancien hôpital du Croisic;Search for the red circle with a cross;-2.51493;47.29183;Q21418896;https://fr.wikipedia.org/wiki/Ancien_h%C3%B4pital_du_Croisic
+I've got wheat and I want flour, where do I have to go ?;Moulin de Beauvran;Search near south of Laboratoire de biologie marine;-2.5179617;47.2855275;Q21152416;https://fr.wikipedia.org/wiki/Moulin_de_Bauvran
+I'm BotMan, where do I park my Botmobile ?;Manoir de Kervaudu;It is a manor surrounded by green areas;-2.526398;47.2964274;Q3286209;https://fr.wikipedia.org/wiki/Manoir_de_Kervaudu
+Sorry but I have to catch my train, meet me there !;Le Croisic;You really need a hint ?!! Are you kidding ???;-2.5072926;47.2898655;Q657183;https://fr.wikipedia.org/wiki/Gare_du_Croisic
+Call Obélix if you want to move it. Where is it ?;Pierre Longue;A camping site is named after me;-2.5307876;47.2873867;Q3305917;https://fr.wikipedia.org/wiki/Pierre_Longue_(Le_Croisic)
+Find an ancient guardhouse (the highest point of Le Croisic);La Vigie de la Romaine;Search in the south;-2.5352891;47.2892059;Q21294459;https://fr.wikipedia.org/wiki/Vigie_de_la_Romaine
+I'm a robot, I believe only in The Great Linux, but I love to admire the architecture of this worship place, where am I ?;Église Notre-Dame de Pitié;Search for a cross;-2.5132206;47.2944387;Q3580230;https://fr.wikipedia.org/wiki/%C3%89glise_Notre-Dame-de-Piti%C3%A9_du_Croisic
+Look for a needle in a haystack, or maybe an aiguillon;Hôtel d'Aiguillon;It is the former city hall;-2.5140281;47.2955089;Q3146215;https://fr.wikipedia.org/wiki/H%C3%B4tel_d%27Aiguillon_(Le_Croisic)
+Even if you bring honey, it will not move, where is it ?;Rocher de l'Ours;Search in the south of Pré Gras;-2.5363867;47.2885058;;
+It used to be a place to take care of patients with tuberculosis;Ancien Sanatorium Saint-Jean-de-Dieu;It is near the lighthouse;-2.5215597;47.300903;;
+It used to be the place to buy fish;Ancienne criée;Near the actual place to buy fish. Yeah, I know, you hate me ...;-2.5106346;47.2950842;;
+I've been arrested ! Where could I be ?;Gendarmerie Nationale;Search in the south east;-2.5043512;47.2826308;Q1422336;https://fr.wikipedia.org/wiki/Gendarmerie_nationale_(France)
+You will found there all you always wanted to know about the history of Le Croisic;Maison du patrimoine croisicais;Search near the Penn-Avel park;-2.5183935;47.2893251;;
+During the Doctoriales, I love to swim in a covered pool;Piscine Port aux Rocs;I can't help you, it is very easy ...;-2.5451033;47.2941144;;

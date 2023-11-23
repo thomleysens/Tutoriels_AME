@@ -1,6 +1,3 @@
-url: 
-    base_url: "https://www.wikidata.org/wiki/Special:EntityData/{}.json"
-    wiki: "frwiki"
 ranges:
     x: [-284221, -277648]
     y: [5987515, 5992714]
