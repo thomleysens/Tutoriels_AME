@@ -5,3 +5,4 @@ format: jb-book
 root: intro
 chapters:
 - file: data_management.ipynb
+- file: game_panel.ipynb
