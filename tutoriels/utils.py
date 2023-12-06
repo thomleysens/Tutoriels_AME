@@ -74,7 +74,8 @@ def load_params(filepath):
         ]
     )
     #Cheap way to check if url
-    #(better methods exist but we keep it simple)
+    #(better methods exist but we want to 
+    #keep it simple)
     if filepath.lower().startswith(
         ("http://", "https://")
     ):
