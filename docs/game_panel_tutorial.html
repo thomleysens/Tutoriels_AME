@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>DOCTORIALES GAME (PANEL APP) TUTORIAL &#8212; Tutoriels</title>
+    <title>Développer une application web dynamique cartographique avec les librairies Python Panel et Bokeh (ou comment construire un jeu interactif ?) &#8212; Tutoriels</title>
   
   
   
@@ -65,6 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'game_panel_tutorial';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="DOCTORIALES GAME (PANEL APP)" href="game_panel.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -165,9 +166,10 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="data_management.html">Api et données spatio-temporelles avec Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="game_panel.html">DOCTORIALES GAME (<em>PANEL APP</em>)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Développer une application web dynamique cartographique avec les librairies Python Panel et Bokeh (<em>ou comment construire un jeu interactif ?</em>)</a></li>
 </ul>
 
     </div>
@@ -338,7 +340,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -349,11 +353,44 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>DOCTORIALES GAME (PANEL APP) TUTORIAL</h1>
+    <h1>Développer une application web dynamique cartographique avec les librairies Python Panel et Bokeh (ou comment construire un jeu interactif ?)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enjeux-propositions">Enjeux &amp; Propositions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparation">Préparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#donnees">Données</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#openstreetmap">OpenStreetMap</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#csv">CSV</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-panel">Application Panel</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enjeux">Enjeux</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explications-du-jeu">Explications du jeu</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explications-techniques">Explications techniques</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-aller-plus-loin">Pour aller plus loin</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instance-locale-avec-panel-serve">Instance locale avec <code class="docutils literal notranslate"><span class="pre">panel</span> <span class="pre">serve</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instance-locale-apres-conversion">Instance locale après conversion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#liens-utiles">Liens utiles</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#licenses-librairies-python-donnees-api">Licenses librairies Python / Données / API</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#donnees-api">Données &amp; API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#librairies-python">Librairies Python</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -363,30 +400,250 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="doctoriales-game-panel-app-tutorial">
-<h1>DOCTORIALES GAME (<em>PANEL APP</em>) TUTORIAL<a class="headerlink" href="#doctoriales-game-panel-app-tutorial" title="Permalink to this heading">#</a></h1>
-<p><em><strong>WIP TUTORIAL ABOUT THE GAME MADE WITH PANEL</strong></em></p>
-<p><a class="reference external" href="https://panel.holoviz.org/how_to/wasm/convert.html">https://panel.holoviz.org/how_to/wasm/convert.html</a></p>
-<p><a class="reference external" href="https://www.openstreetmap.org/">https://www.openstreetmap.org/</a> =&gt; Search for elements</p>
-<p><a class="reference external" href="https://jupyterbook.org/en/stable/start/your-first-book.html">https://jupyterbook.org/en/stable/start/your-first-book.html</a></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#READ &amp; lOAD YAML PARAMETERS</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/thomleysens/Tutoriels_AME/main/tutoriels/game_params.yml&quot;</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="n">params</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-<span class="n">RANGES</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;ranges&quot;</span><span class="p">]</span>
-<span class="n">BUFFER_VALUE</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;buffer_value&quot;</span><span class="p">]</span>
-<span class="n">NB_Q</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;nb_questions&quot;</span><span class="p">]</span>
-<span class="n">CSV_SEP</span> <span class="o">=</span> <span class="s2">&quot;;&quot;</span>
-<span class="n">CSV_FILE</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/thomleysens/Tutoriels_AME/main/tutoriels/game_QA.csv&quot;</span>
+  <section class="tex2jax_ignore mathjax_ignore" id="developper-une-application-web-dynamique-cartographique-avec-les-librairies-python-panel-et-bokeh-ou-comment-construire-un-jeu-interactif">
+<h1>Développer une application web dynamique cartographique avec les librairies Python <a class="reference external" href="https://panel.holoviz.org/">Panel</a> et <a class="reference external" href="https://docs.bokeh.org/en/latest/">Bokeh</a> (<em>ou comment construire un jeu interactif ?</em>)<a class="headerlink" href="#developper-une-application-web-dynamique-cartographique-avec-les-librairies-python-panel-et-bokeh-ou-comment-construire-un-jeu-interactif" title="Permalink to this heading">#</a></h1>
+<blockquote>
+<div><p><em><strong><a class="reference external" href="https://thomleysens.github.io/Tutoriels_AME/game_panel.html">Lien direct vers le jeu</a></strong></em></p>
+</div></blockquote>
+<blockquote>
+<div><p><em><strong>AVERTISSEMENT: il existe de nombreuses façons d’améliorer le code de notre application. Néanmoins, nous avons souhaité essayer de le rendre le plus simple et le plus accessible possible tout en restant “pythonique”.</strong></em></p>
+</div></blockquote>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Sujet</p></th>
+<th class="head text-center"><p>Auteur</p></th>
+<th class="head text-center"><p>Dernière Màj</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>Application webmapping</p></td>
+<td class="text-center"><p>Thomas LEYSENS (<em>IR AME</em>)</p></td>
+<td class="text-center"><p><em>07 décembre 2023</em></p></td>
+</tr>
+</tbody>
+</table>
+<section id="enjeux-propositions">
+<h2>Enjeux &amp; Propositions<a class="headerlink" href="#enjeux-propositions" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Enjeu</p></th>
+<th class="head text-left"><p>Proposition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Global</p></td>
+<td class="text-left"><p>Développer une application de webmapping</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Classe et fonctions Python</p></td>
+<td class="text-left"><p>Explications et exemples</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Structurer une application</p></td>
+<td class="text-left"><p>Widgets, figures et callbacks</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Utiliser des paramètres externes</p></td>
+<td class="text-left"><p>Charger et lire un fichier YAML</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Utiliser des données externes</p></td>
+<td class="text-left"><p>Charger et lire un fichier CSV avec Pandas et Geopandas</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Contraintes d’une application en ligne</p></td>
+<td class="text-left"><p>Différences entre local et en ligne</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="preparation">
+<h2>Préparation<a class="headerlink" href="#preparation" title="Permalink to this heading">#</a></h2>
+<section id="donnees">
+<h3>Données<a class="headerlink" href="#donnees" title="Permalink to this heading">#</a></h3>
+<p>Dans notre cas, nous souhaitons construire un fichier de questions/réponses au format CSV (<em>comma-separated values</em>) afin qu’il soit chargé dans notre application:</p>
+<ul class="simple">
+<li><p>c’est un jeu cartographique, nous allons donc récupérer des données sur <a class="reference external" href="https://www.openstreetmap.org/">OpenStreetMap</a></p></li>
+<li><p>nous souhaitons agrémenter les réponses d’un lien Wikipédia (<em>quand il est disponible</em>), un prétraitement est donc nécessaire (<em>afin de ne pas relancer les mêmes requêtes web lors de chaque lancement de notre application</em>).</p></li>
+</ul>
+<section id="openstreetmap">
+<h4>OpenStreetMap<a class="headerlink" href="#openstreetmap" title="Permalink to this heading">#</a></h4>
+<blockquote>
+<div><p><em><strong>AVERTISSEMENT: Veillez à bien respecter les conditions d’utilisation des données open source d’OpenStreetMap, cf. <a class="reference external" href="https://opendatacommons.org/licenses/odbl">License Open Data Commons Open Database License (ODbL)</a></strong></em></p>
+</div></blockquote>
+<p>Allons chercher quelques lieux symboliques de Le Croisic sur <a class="reference external" href="https://www.openstreetmap.org/">OpenStreetMap</a>, voici comment faire pour l’exemple en question (<em>Pierre Longue</em>):</p>
+<p><img alt="OSM query" src="_images/OSM.png" /></p>
+</section>
+<section id="csv">
+<h4>CSV<a class="headerlink" href="#csv" title="Permalink to this heading">#</a></h4>
+<p>Petit à petit, nous pouvons construire notre <a class="reference external" href="https://raw.githubusercontent.com/thomleysens/Tutoriels_AME/main/tutoriels/game_QA.csv">fichier CSV</a> de questions/réponses avec tous les détails souhaités, dont voici un extrait ci-dessous:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>question</p></th>
+<th class="head text-left"><p>answer</p></th>
+<th class="head text-left"><p>hint</p></th>
+<th class="head text-right"><p>x</p></th>
+<th class="head text-right"><p>y</p></th>
+<th class="head text-left"><p>wikidata</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>My eye, when opened, can save the ships. Who am I ?</p></td>
+<td class="text-left"><p>Phare du Tréhic</p></td>
+<td class="text-left"><p>Search in the North</p></td>
+<td class="text-right"><p>-2.5237</p></td>
+<td class="text-right"><p>47.3082</p></td>
+<td class="text-left"><p>Q20971192</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>If you break your leg, where do you go ?</p></td>
+<td class="text-left"><p>Ancien hôpital du Croisic</p></td>
+<td class="text-left"><p>Search for the red circle with a cross</p></td>
+<td class="text-right"><p>-2.51493</p></td>
+<td class="text-right"><p>47.2918</p></td>
+<td class="text-left"><p>Q21418896</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>I’ve got wheat and I want flour, where do I have to go ?</p></td>
+<td class="text-left"><p>Moulin de Beauvran</p></td>
+<td class="text-left"><p>Search near south of Laboratoire de biologie marine</p></td>
+<td class="text-right"><p>-2.51796</p></td>
+<td class="text-right"><p>47.2855</p></td>
+<td class="text-left"><p>Q21152416</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>I’m BotMan, where do I park my Botmobile ?</p></td>
+<td class="text-left"><p>Manoir de Kervaudu</p></td>
+<td class="text-left"><p>It is a manor surrounded by green areas</p></td>
+<td class="text-right"><p>-2.5264</p></td>
+<td class="text-right"><p>47.2964</p></td>
+<td class="text-left"><p>Q3286209</p></td>
+</tr>
+</tbody>
+</table>
+<p>On peut constater qu’il nous manque les URL des pages Wikipedia (<em>elles sont parfois présentes dans les données OSM mais nous préférons utiliser le Wikidata car il est plus souvent renseigné</em>). Il est possible de les retrouver via l’identifiant <a class="reference external" href="https://fr.wikipedia.org/wiki/Wikidata">Wikidata</a>. Plutôt que de faire des recherches manuelles, nous allons créer une méthode Python pour récupérer automatiquement l’information et compléter le fichier CSV (<em>le fichier Python se trouve <a class="reference external" href="https://github.com/thomleysens/Tutoriels_AME/blob/main/tutoriels/utils.py">ici</a> et nous allons le détailler et l’expliquer</em>).</p>
+<p>Tout d’abord, voici le code brut:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">@author: thomleysens</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+
+<span class="k">def</span> <span class="nf">get_wiki_url</span><span class="p">(</span>
+    <span class="n">wikidata_id</span><span class="p">,</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://www.wikidata.org/wiki/Special:EntityData/</span><span class="si">{}</span><span class="s2">.json&quot;</span><span class="p">,</span>
+    <span class="n">wiki</span><span class="o">=</span><span class="s2">&quot;frwiki&quot;</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get wikipedia url from wikidata ID</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    wikidata_id (str): Wikidata ID</span>
+<span class="sd">    base_url (str): Url to request Entity and get JSON response</span>
+<span class="sd">                    Default: &quot;https://www.wikidata.org/wiki/Special:EntityData/{}.json</span>
+<span class="sd">    wiki (str): Wiki reference</span>
+<span class="sd">                Default: &quot;frwiki&quot;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    url (str):</span>
+<span class="sd">        - Wikipedia URL if wikidata_id is not NA</span>
+<span class="sd">        - None if wikidata_id is NA</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">wikidata_id</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">base_url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">wikidata_id</span><span class="p">)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;entities&quot;</span><span class="p">][</span><span class="n">wikidata_id</span><span class="p">][</span><span class="s2">&quot;sitelinks&quot;</span><span class="p">][</span><span class="n">wiki</span><span class="p">][</span><span class="s2">&quot;url&quot;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">url</span>
 </pre></div>
 </div>
-<div class="highlight-cmd notranslate"><div class="highlight"><pre><span></span>panel convert game_panel.ipynb --to pyodide-worker --out pyodide
+<p>Détaillons et explicitons le:</p>
+<ul class="simple">
+<li><p>Tout d’abord, un commentaire indiquant l’auteur du code (<em>cette partie du code ne sera pas exécutée étant considérée comme un commentaire</em>):</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">@author: thomleysens</span>
+<span class="sd">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
-<div class="highlight-cmd notranslate"><div class="highlight"><pre><span></span>python3 -m http.server
+<ul class="simple">
+<li><p>Il est nécessaire, ensuite, d’importer les librairies/modules Python qui seront utilisés dans notre code (<em><a class="reference external" href="https://requests.readthedocs.io/en/latest/">requests</a> et <a class="reference external" href="https://pandas.pydata.org/">pandas</a></em>):</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 </pre></div>
 </div>
-<p><a class="reference external" href="http://localhost:8000/pyodide/game_panel.html">http://localhost:8000/pyodide/game_panel.html</a></p>
+<ul class="simple">
+<li><p>Vient ensuite la fonction/méthode Python qui nous intéresse. Il convient de respecter <a class="reference external" href="https://peps.python.org/pep-0008/#function-and-variable-names">certaines conventions</a> pour la nommer. Le nom de la fonction vient après le mot clef <code class="docutils literal notranslate"><span class="pre">def</span></code> qui définit une fonction. Nous indiquons entre parenthèses les arguments qui peuvent être <a class="reference external" href="https://stackoverflow.com/a/9450673">des <em><strong>positional arguments</strong></em> ou des <em><strong>keywords arguments</strong></em></a>.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_wiki_url</span><span class="p">(</span>
+<span class="n">wikidata_id</span><span class="p">,</span>
+<span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://www.wikidata.org/wiki/Special:EntityData/</span><span class="si">{}</span><span class="s2">.json&quot;</span><span class="p">,</span>
+<span class="n">wiki</span><span class="o">=</span><span class="s2">&quot;frwiki&quot;</span>
+<span class="p">):</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Il convient de bien renseigner la fonction (<em>afin qu’elle puisse êre comprise/modifiée/corrigée par d’autres</em>). Pour ce faire, nous utilisons des <a class="reference external" href="https://peps.python.org/pep-0257/">docstrings</a>:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Get wikipedia url from wikidata ID</span>
+
+<span class="sd">Parameters</span>
+<span class="sd">----------</span>
+<span class="sd">wikidata_id (str): Wikidata ID</span>
+<span class="sd">base_url (str): Url to request Entity and get JSON response</span>
+<span class="sd">              Default: &quot;https://www.wikidata.org/wiki/Special:EntityData/{}.json</span>
+<span class="sd">wiki (str): Wiki reference</span>
+<span class="sd">          Default: &quot;frwiki&quot;</span>
+
+<span class="sd">Returns</span>
+<span class="sd">-------</span>
+<span class="sd">url (str):</span>
+<span class="sd">- Wikipedia URL if wikidata_id is not NA</span>
+<span class="sd">- None if wikidata_id is NA</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Enfin vient le code qui sera exécuté. Tout d’abord, on vérifie que <code class="docutils literal notranslate"><span class="pre">wikidata_id</span></code> n’est pas <code class="docutils literal notranslate"><span class="pre">NaN</span></code> (<em>valeur nulle</em>) avant de continuer. Cela est nécessaire car certaines lignes de notre CSV contiennent des valeurs nulles dans la colonne <code class="docutils literal notranslate"><span class="pre">wikidata</span></code>.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">wikidata_id</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+</pre></div>
+</div>
+<ul>
+<li><p>Si <code class="docutils literal notranslate"><span class="pre">wikidata_id</span></code> n’est pas <code class="docutils literal notranslate"><span class="pre">NaN</span></code>:</p>
+<ul>
+<li><p>nous formatons <code class="docutils literal notranslate"><span class="pre">base_url</span></code> avec la variable <code class="docutils literal notranslate"><span class="pre">wikidata_url</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">base_url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">wikidata_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>nous utilisons la fonction <code class="docutils literal notranslate"><span class="pre">get()</span></code> de la librairie <code class="docutils literal notranslate"><span class="pre">requests</span></code> pour lancer une requête web avec l’url formatée et nous récupérons une valeur précise dans le <a class="reference external" href="https://www.json.org/json-en.html">JSON</a> renvoyée par notre requête (<em>si nous étions meilleurs élèves, il faudrait vérifier que la requête s’est bien déroulée</em>): la valeur <code class="docutils literal notranslate"><span class="pre">&quot;url&quot;</span></code>. Imaginons que <code class="docutils literal notranslate"><span class="pre">wikidata_id</span></code> ait la valeur <code class="docutils literal notranslate"><span class="pre">Q20971192</span></code> et que <code class="docutils literal notranslate"><span class="pre">wiki</span></code> ait la valeur par défaut, la valeur de l’élément <code class="docutils literal notranslate"><span class="pre">&quot;url&quot;</span></code> se trouverait au bout du “chemin” <code class="docutils literal notranslate"><span class="pre">[&quot;entities&quot;][&quot;Q20971192&quot;][&quot;sitelinks&quot;][&quot;frwiki&quot;][&quot;url&quot;]</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">wikidata_id</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;entities&quot;</span><span class="p">][</span><span class="n">wikidata_id</span><span class="p">][</span><span class="s2">&quot;sitelinks&quot;</span><span class="p">][</span><span class="n">wiki</span><span class="p">][</span><span class="s2">&quot;url&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>Si <code class="docutils literal notranslate"><span class="pre">wikidata_id</span></code> est <code class="docutils literal notranslate"><span class="pre">NaN</span></code>, la fonction attribue la valeur <code class="docutils literal notranslate"><span class="pre">None</span></code> à la variable <code class="docutils literal notranslate"><span class="pre">url</span></code>:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">else</span><span class="p">:</span>
+  <span class="n">url</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>La fonction renvoie enfin la variable <code class="docutils literal notranslate"><span class="pre">url</span></code>:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="n">url</span>
+</pre></div>
+</div>
+<p>Nous pouvons donc (<em>cf code ci-dessous</em>):</p>
+<ul class="simple">
+<li><p>lire et charger le fichier CSV <code class="docutils literal notranslate"><span class="pre">game_QA.csv</span></code></p></li>
+<li><p>importer la fonction précédente afin de l’appliquer à la colonne <code class="docutils literal notranslate"><span class="pre">url</span></code></p></li>
+<li><p>enregistrer le fichier CSV modifié</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -412,6 +669,557 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
+</section>
+</section>
+<section id="application-panel">
+<h2>Application Panel<a class="headerlink" href="#application-panel" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p><em>Nous présentons ici les fonctionnalités offertes par les librairies Python <a class="reference external" href="https://panel.holoviz.org/">Panel</a> et <a class="reference external" href="https://docs.bokeh.org/en/latest/">Bokeh</a> pour la création d’une application de webmapping interactive et dynamique. Il s’agit de mettre en lumière quelques possibilités et de donner un exemple de code.</em></p>
+</div></blockquote>
+<blockquote>
+<div><p><em>Le Jupyter Notebook contenant l’application se trouve <a class="reference external" href="https://github.com/thomleysens/Tutoriels_AME/blob/main/tutoriels/game_panel.ipynb">ici</a></em></p>
+</div></blockquote>
+<section id="enjeux">
+<h3>Enjeux<a class="headerlink" href="#enjeux" title="Permalink to this heading">#</a></h3>
+<p>Nous avons souhaité développé une application - que nous espérons ludique - afin d’illustrer quelques possibilités pour une application interactive et dynamique avec un certain degré de complexité. Les enjeux sont les suivants:</p>
+<ul class="simple">
+<li><p>Exposer les possibilités d’intégrer une carte interactive</p></li>
+<li><p>Intégrer un exemple de chat</p></li>
+<li><p>Créer quelques widgets et des callbacks liés</p></li>
+<li><p>Montrer des exemples d’interactions</p></li>
+<li><p>Charger des fichiers (<em>paramètres et données</em>)</p></li>
+<li><p>Exposer quelques possibilités de données/outils à disposition pour la cartographie</p></li>
+</ul>
+</section>
+<section id="explications-du-jeu">
+<h3>Explications du jeu<a class="headerlink" href="#explications-du-jeu" title="Permalink to this heading">#</a></h3>
+<blockquote>
+<div><p>Nous vous conseillons de faire une partie de <a class="reference external" href="https://thomleysens.github.io/Tutoriels_AME/game_panel.html">notre jeu</a> avant de lire la suite afin de mieux comprendre ce que nous allons exposer</p>
+</div></blockquote>
+<p>Le jeu fonctionne ainsi:</p>
+<ul class="simple">
+<li><p>une fois le bouton <code class="docutils literal notranslate"><span class="pre">START</span></code> enclenché, une nouvelle partie commence et le chat affiche une nouvelle question</p></li>
+<li><p>vous répondez à ce jeu cartographique en ajoutant un point sur la carte puis en cliquant sur le bouton <code class="docutils literal notranslate"><span class="pre">VALIDATE</span></code></p></li>
+<li><p>le programme vérifie la réponse et renvoie un temps passé pour cette question ou un indice si la réponse n’est pas valide</p></li>
+<li><p>une fois un nombre maximal de questions atteint, le programme renvoie le temps passé par question (<em>sous la forme d’un histogramme</em>) et le temps total</p></li>
+<li><p>une partie peut être relancée en appuyant sur le bouton <code class="docutils literal notranslate"><span class="pre">RESET</span></code> puis <code class="docutils literal notranslate"><span class="pre">START</span></code></p></li>
+</ul>
+</section>
+<section id="explications-techniques">
+<h3>Explications techniques<a class="headerlink" href="#explications-techniques" title="Permalink to this heading">#</a></h3>
+<p><img alt="panel app" src="_images/animation.gif" /></p>
+<p>Tout d’abord, comme pour le module Python contenant notre fonction précédente, nous importons les librairies Python que nous utiliserons dans notre classe et fonctions Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">panel</span> <span class="k">as</span> <span class="nn">pn</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">xyzservices.providers</span> <span class="k">as</span> <span class="nn">xyz</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">sample</span>
+<span class="kn">from</span> <span class="nn">bokeh.palettes</span> <span class="kn">import</span> <span class="n">Greens5</span> <span class="k">as</span> <span class="n">palette</span>
+<span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ColumnDataSource</span><span class="p">,</span>
+    <span class="n">PointDrawTool</span><span class="p">,</span> 
+    <span class="n">Button</span><span class="p">,</span>
+    <span class="n">HoverTool</span><span class="p">,</span>
+    <span class="n">Range1d</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="kn">import</span> <span class="n">figure</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span>
+
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">load_params</span>
+</pre></div>
+</div>
+<p>Intéressons nous à la dernière ligne:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">load_params</span>
+</pre></div>
+</div>
+<p>Elle est séparée des autres puisque nous importons une fonction que nous avons créée - <em>et non une librairie Python installée dans notre environnement</em> - depuis un module que nous avons développé.</p>
+<p>Il est nécessaire, pour que l’application fonctionne correctement depuis le notebook, d’indiquer à Panel de charger <a class="reference external" href="https://panel.holoviz.org/api/cheatsheet.html#pn-extension">la ou les extensions(s) nécessaire(s)</a>. Les paramètres entre parenthèses peuvent, bien entendu, varier en fonction des besoins:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pn</span><span class="o">.</span><span class="n">extension</span><span class="p">(</span><span class="n">notifications</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>L’application repose sur quelques paramètres que nous avons choisi de charger depuis un fichier de paramètres <a class="reference external" href="https://fr.wikipedia.org/wiki/YAML">YAML</a> (<em>dont voici un exemple ci-dessous</em>) afin de ne pas surcharger notre application.</p>
+<p>Le <a class="reference external" href="https://github.com/thomleysens/Tutoriels_AME/blob/main/tutoriels/game_params.yml">fichier YAML</a> se présente ainsi:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ranges</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">x</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-284221</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-277648</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">y</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">5987515</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5992714</span><span class="p p-Indicator">]</span>
+<span class="nt">buffer_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">200</span>
+<span class="nt">csv</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;game_QA.csv&quot;</span>
+<span class="w">    </span><span class="nt">sep</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;;&quot;</span><span class="w"> </span>
+<span class="nt">nb_questions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+</pre></div>
+</div>
+<p>Détaillons ces paramètres:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ranges</span></code>: nous indiquons des intervalles pour l’axe des x et des y pour la figure comprenant la carte (<em>les valeurs sont exprimées en <a class="reference external" href="https://fr.wikipedia.org/wiki/Syst%C3%A8me_de_coordonn%C3%A9es_(cartographie)">EPSG</a> 3857</em>). Ces valeurs ont été obtenues via l’outil <a class="reference external" href="https://tools.geofabrik.de/calc/">Tile calculator de Geofabrik</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buffer_value</span></code>: Valeur (<em>en mètres</em>) utilisée pour créer un buffer (<em>ou zone tampon</em>) lors de la vérification d’un point tracé par l’utilisateur.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">csv</span></code>: Indication du chemin du fichier CSV via <code class="docutils literal notranslate"><span class="pre">file</span></code> et du séparateur avec <code class="docutils literal notranslate"><span class="pre">sep</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nb_questions</span></code>:  Nombre maximal de questions par session de jeu</p></li>
+</ul>
+<p>Ceux-ci doivent être <em>lus</em> et <em>compris</em> par notre code, il faut donc que Python puisse lire notre fichier de paramètres, c’est l’objet des lignes suivantes dans notre module:</p>
+<blockquote>
+<div><p><em><strong>Avertissement: il existe une légère différence entre la version locale et la version en ligne de notre application - pour des raisons de sécurité - puisqu’il n’est pas possible de charger un fichier “local” depuis une application. Pour la version en ligne, nous chargeons donc un fichier de paramètres hébergé en ligne sur notre dépôt GitHub qui comporte un lien vers un fichier CSV également hébergé sur notre dépôt.</strong></em></p>
+</div></blockquote>
+<ul class="simple">
+<li><p>version locale:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filepath</span> <span class="o">=</span> <span class="s2">&quot;./game_params.yml&quot;</span>
+<span class="n">PARAMS</span> <span class="o">=</span> <span class="n">load_params</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>version en ligne:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filepath</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/thomleysens/Tutoriels_AME/main/tutoriels/game_params_remote.yml&quot;</span>
+<span class="n">PARAMS</span> <span class="o">=</span> <span class="n">load_params</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">load_params</span></code> est importée depuis <code class="docutils literal notranslate"><span class="pre">utils.py</span></code>. Elle permet de gérer 2 cas pour charger un fichier de paramètres: depuis un fichier local ou depuis une URL.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">load_params</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load parameters from local or remote</span>
+<span class="sd">    YAML file</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filepath (str): URL or path to local file</span>
+<span class="sd">                    File (local or remote) needs </span>
+<span class="sd">                    to be structured like this:</span>
+<span class="sd">                    ranges:</span>
+<span class="sd">                        x: [-284221, -277648]</span>
+<span class="sd">                        y: [5987515, 5992714]</span>
+<span class="sd">                    buffer_value: 200</span>
+<span class="sd">                    csv:</span>
+<span class="sd">                        file: &quot;game_QA.csv&quot;</span>
+<span class="sd">                        sep: &quot;;&quot; </span>
+<span class="sd">                    nb_questions: 5</span>
+<span class="sd">    Return</span>
+<span class="sd">    ------</span>
+<span class="sd">    params (namedtuple)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Params</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span>
+        <span class="s2">&quot;Params&quot;</span><span class="p">,</span>
+        <span class="p">[</span>
+            <span class="s2">&quot;ranges&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;buffer_value&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;nb_q&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;csv_sep&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;csv_file&quot;</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="c1">#Cheap way to check if url</span>
+    <span class="c1">#(better methods exist but we keep it simple)</span>
+    <span class="k">if</span> <span class="n">filepath</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span>
+        <span class="p">(</span><span class="s2">&quot;http://&quot;</span><span class="p">,</span> <span class="s2">&quot;https://&quot;</span><span class="p">)</span>
+    <span class="p">):</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span>
+            <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+                <span class="n">file</span><span class="p">,</span>
+                <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">FullLoader</span><span class="p">,</span>
+            <span class="p">)</span>
+
+    <span class="n">params</span> <span class="o">=</span> <span class="n">Params</span><span class="p">(</span>
+        <span class="n">content</span><span class="p">[</span><span class="s2">&quot;ranges&quot;</span><span class="p">],</span>
+        <span class="n">content</span><span class="p">[</span><span class="s2">&quot;buffer_value&quot;</span><span class="p">],</span>
+        <span class="n">content</span><span class="p">[</span><span class="s2">&quot;nb_questions&quot;</span><span class="p">],</span>
+        <span class="n">content</span><span class="p">[</span><span class="s2">&quot;csv&quot;</span><span class="p">][</span><span class="s2">&quot;sep&quot;</span><span class="p">],</span>
+        <span class="n">content</span><span class="p">[</span><span class="s2">&quot;csv&quot;</span><span class="p">][</span><span class="s2">&quot;file&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">params</span>
+</pre></div>
+</div>
+<p>Cette fonction permet de vérifier (<em>d’une manière un peu pauvre mais nous souhaitons garder une certaine simplicité</em>) si le chemin du fichier est une URL ou, à défaut, un chemin vers un fichier local:</p>
+<ul class="simple">
+<li><p>si c’est une URL le code lance une requête web et lit le résultat de la requête pour charger le YAML</p></li>
+<li><p>si c’est un chemin vers un fichier local, il charge le fichier.</p></li>
+</ul>
+<p>La fonction renvoie un <a class="reference external" href="https://docs.python.org/3/library/collections.html#collections.namedtuple">namedtuple</a> <code class="docutils literal notranslate"><span class="pre">params</span></code> qui est un objet Python (<em>similaire à une classe</em>) comprenant les éléments suivants présents dans le YAML:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ranges</span></code> =&gt; ranges x et y</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buffer_value</span></code> =&gt; valeur du buffer en mètres</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nb_q</span></code> =&gt; nombre maximum de questions par session</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">csv_sep</span></code> =&gt; délimiteur CSV</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">csv_file</span></code> =&gt; chemin/URL vers le fichier CSV</p></li>
+</ul>
+<p>Elle permet de rendre le code plus <em>propre</em> et lisible sans le complexifier à outrance.</p>
+<p>Nous arrivons enfin à notre <a class="reference external" href="https://docs.python.org/fr/3/tutorial/classes.html">classe Python</a> <code class="docutils literal notranslate"><span class="pre">Game</span></code> contenant la création de widgets, figures et fonctions.</p>
+<p>Tout d’abord, nous initialisons les différents widgets, figures, variables dans la fonction <code class="docutils literal notranslate"><span class="pre">__init__</span></code>. Vous noterez qu’elle fait partie de notre classe <code class="docutils literal notranslate"><span class="pre">Game</span></code> ainsi que <code class="docutils literal notranslate"><span class="pre">self</span></code> dans les arguments: cela indique que cette fonction appartient à la classe <code class="docutils literal notranslate"><span class="pre">Game</span></code> et qu’elle peut être appelée par d’autres fonctions dans la même classe, par exemple. Il en va de même pour les variables commençant par <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Init figures and widgets:</span>
+<span class="sd">            - map</span>
+<span class="sd">            - chat feed</span>
+<span class="sd">            - histogram</span>
+<span class="sd">            - main board</span>
+<span class="sd">        &amp; load DataFrame from CSV file</span>
+<span class="sd">        &amp; transform it to GeoDataFrame</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rules</span> <span class="o">=</span> <span class="n">pn</span><span class="o">.</span><span class="n">pane</span><span class="o">.</span><span class="n">Alert</span><span class="p">(</span>
+            <span class="s2">&quot;&lt;p&gt;Click on the START button </span><span class="se">\</span>
+<span class="s2">            to start a game.&lt;/p&gt;&lt;p&gt;Place a point on the map </span><span class="se">\</span>
+<span class="s2">            (&lt;i&gt;with Point Draw Tool&lt;/i&gt; </span><span class="se">\</span>
+<span class="s2">            &lt;img src=&#39;https://docs.bokeh.org/en/latest/_images/PointDraw.png&#39; </span><span class="se">\</span>
+<span class="s2">            alt=&#39;Point draw tool&#39; style=&#39;width:20px;height:20px&#39;&gt;) </span><span class="se">\</span>
+<span class="s2">            to answer a question (&lt;i&gt;out of a total of </span><span class="si">{}</span><span class="s2">&lt;/i&gt;)&lt;/p&gt;&lt;p&gt;Then click </span><span class="se">\</span>
+<span class="s2">            on the VALIDATE button.&lt;/p&gt;&lt;p&gt;You can also pan </span><span class="se">\</span>
+<span class="s2">            &lt;img src=&#39;https://docs.bokeh.org/en/latest/_images/Pan.png&#39; </span><span class="se">\</span>
+<span class="s2">            alt=&#39;Pan tool&#39; style=&#39;width:20px;height:20px&#39;&gt; </span><span class="se">\</span>
+<span class="s2">            and wheel zoom </span><span class="se">\</span>
+<span class="s2">            &lt;img src=&#39;https://docs.bokeh.org/en/latest/_images/WheelZoom.png&#39; </span><span class="se">\</span>
+<span class="s2">            alt=&#39;Wheel zoom tool&#39; style=&#39;width:20px;height:20px&#39;&gt;&lt;/p&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PARAMS</span><span class="o">.</span><span class="n">nb_q</span><span class="p">),</span>
+            <span class="n">alert_type</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">issues</span> <span class="o">=</span> <span class="n">pn</span><span class="o">.</span><span class="n">pane</span><span class="o">.</span><span class="n">Alert</span><span class="p">(</span>
+            <span class="s2">&quot;If you find bugs or want to propose new features, </span><span class="se">\</span>
+<span class="s2">            feel free to create a </span><span class="se">\</span>
+<span class="s2">            &lt;a href=&#39;https://github.com/thomleysens/Tutoriels_AME/issues&#39; </span><span class="se">\</span>
+<span class="s2">            target=&#39;_blank&#39;&gt;new issue on GitHub&lt;/a&gt;&quot;</span><span class="p">,</span>
+            <span class="n">alert_type</span><span class="o">=</span><span class="s2">&quot;warning&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">progress_value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">100</span><span class="o">/</span><span class="n">PARAMS</span><span class="o">.</span><span class="n">nb_q</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chat_feed</span> <span class="o">=</span> <span class="n">pn</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">ChatFeed</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;map&quot;</span><span class="p">,</span>
+            <span class="n">sizing_mode</span><span class="o">=</span><span class="s2">&quot;stretch_both&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">add_tile</span><span class="p">(</span><span class="n">xyz</span><span class="o">.</span><span class="n">OpenStreetMap</span><span class="o">.</span><span class="n">Mapnik</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">x_range</span> <span class="o">=</span> <span class="n">Range1d</span><span class="p">(</span>
+            <span class="n">PARAMS</span><span class="o">.</span><span class="n">ranges</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">PARAMS</span><span class="o">.</span><span class="n">ranges</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">y_range</span> <span class="o">=</span> <span class="n">Range1d</span><span class="p">(</span>
+            <span class="n">PARAMS</span><span class="o">.</span><span class="n">ranges</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">PARAMS</span><span class="o">.</span><span class="n">ranges</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+            <span class="n">PARAMS</span><span class="o">.</span><span class="n">csv_file</span><span class="p">,</span>
+            <span class="n">sep</span><span class="o">=</span><span class="n">PARAMS</span><span class="o">.</span><span class="n">csv_sep</span><span class="p">,</span>
+            <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span>
+        <span class="p">)</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">y</span><span class="p">),</span>
+            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gdf_base</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span>
+            <span class="n">epsg</span><span class="o">=</span><span class="mi">4326</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span>
+            <span class="n">epsg</span><span class="o">=</span><span class="mi">3857</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gdf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gdf_base</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_random</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">progress</span> <span class="o">=</span> <span class="n">pn</span><span class="o">.</span><span class="n">indicators</span><span class="o">.</span><span class="n">Dial</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Completion&quot;</span><span class="p">,</span> 
+            <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
+            <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> 
+            <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{value}</span><span class="s2"> %&quot;</span><span class="p">,</span>
+            <span class="n">colors</span><span class="o">=</span><span class="p">[</span>
+                <span class="p">(</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">palette</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> 
+                <span class="p">(</span><span class="mf">0.50</span><span class="p">,</span> <span class="n">palette</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> 
+                <span class="p">(</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">palette</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span>
+                <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">palette</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+            <span class="p">],</span>
+            <span class="n">title_size</span><span class="o">=</span><span class="s2">&quot;18px&quot;</span><span class="p">,</span>
+            <span class="n">value_size</span><span class="o">=</span><span class="s2">&quot;20px&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> 
+            <span class="n">y</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> 
+            <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">,</span> 
+            <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">on_change</span><span class="p">(</span>
+            <span class="s2">&quot;data_source&quot;</span><span class="p">,</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_get_point</span>
+        <span class="p">)</span>
+        <span class="n">draw_tool</span> <span class="o">=</span> <span class="n">PointDrawTool</span><span class="p">(</span>
+            <span class="n">renderers</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">],</span> 
+            <span class="n">empty_value</span><span class="o">=</span><span class="s2">&quot;black&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">add_tools</span><span class="p">(</span><span class="n">draw_tool</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">toolbar</span><span class="o">.</span><span class="n">active_tap</span> <span class="o">=</span> <span class="n">draw_tool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_button</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;START&quot;</span><span class="p">,</span> 
+            <span class="n">button_type</span><span class="o">=</span><span class="s2">&quot;success&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset_button</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;RESET&quot;</span><span class="p">,</span> 
+            <span class="n">button_type</span><span class="o">=</span><span class="s2">&quot;warning&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_button</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;VALIDATE&quot;</span><span class="p">,</span> 
+            <span class="n">button_type</span><span class="o">=</span><span class="s2">&quot;success&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_button</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_get_question</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_button</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_check</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset_button</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_reset</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loading</span> <span class="o">=</span> <span class="n">pn</span><span class="o">.</span><span class="n">indicators</span><span class="o">.</span><span class="n">LoadingSpinner</span><span class="p">(</span>
+            <span class="n">value</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+            <span class="n">size</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> 
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;spinner&quot;</span><span class="p">,</span> 
+            <span class="n">visible</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+        <span class="n">tooltips</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;question&quot;</span><span class="p">,</span> <span class="s2">&quot;@question&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;@time&quot;</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hist</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span>
+            <span class="n">x_axis_label</span><span class="o">=</span><span class="s2">&quot;Question&quot;</span><span class="p">,</span>
+            <span class="n">y_axis_label</span><span class="o">=</span><span class="s2">&quot;Time in seconds&quot;</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Time by question&quot;</span><span class="p">,</span>
+            <span class="n">toolbar_location</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+            <span class="n">tools</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">x_range</span><span class="o">=</span><span class="p">[</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">PARAMS</span><span class="o">.</span><span class="n">nb_q</span><span class="p">)</span>
+            <span class="p">],</span>
+            <span class="n">sizing_mode</span><span class="o">=</span><span class="s2">&quot;stretch_both&quot;</span><span class="p">,</span>
+            <span class="n">tooltips</span><span class="o">=</span><span class="n">tooltips</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hist</span><span class="o">.</span><span class="n">vbar</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">=</span><span class="s2">&quot;question&quot;</span><span class="p">,</span>
+            <span class="n">top</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">bottom</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hist_source</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_board</span> <span class="o">=</span> <span class="n">pn</span><span class="o">.</span><span class="n">Row</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">chat_feed</span><span class="p">,</span>
+            <span class="n">sizing_mode</span><span class="o">=</span><span class="s2">&quot;stretch_both&quot;</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><em>Dans la suite de ce tutoriel, nous ne détaillerons pas chaque fonction, puisque nous avons déjà exposé en détail le fonctionnement de fonctions précédentes. Il ne nous semble donc pas nécessaire d’illustrer encore plus ce que peut être une fonction Python</em></p>
+</div></blockquote>
+<p>Cette fonction comprend:</p>
+<ul class="simple">
+<li><p>la création d’espaces de textes (<em>sous la forme <a class="reference external" href="https://panel.holoviz.org/reference/panes/Alert.html">d’alertes Panel</a></em>) afin d’indiquer les règles du jeu ainsi que la possibilité de créer des issues sur GitHub:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.rules</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.issues</span></code></p></li>
+</ul>
+</li>
+<li><p>la création de widgets:</p>
+<ul>
+<li><p>des <a class="reference external" href="https://docs.bokeh.org/en/latest/docs/user_guide/interaction/widgets.html#button">boutons</a>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.run_button</span></code>: bouton <code class="docutils literal notranslate"><span class="pre">START</span></code> auquel est liée - déclenchée par un clic gauche - la fonction <code class="docutils literal notranslate"><span class="pre">Game._get_question</span></code> (<em>la fonction contient un “_” - underscore - car nous la considérons “privée”, elle n’est pas destinée à être utilisée en dehors du fonctionnement interne de la classe</em>):</p>
+<ul>
+<li><p>choix d’une question dans une sélection au hasard de l’ensemble des questions disponibles</p></li>
+<li><p>si le nombre maximal de question a été atteint, le programme renvoie le temps total et un histogramme du temps passé par question dans le chat</p></li>
+<li><p>s’il reste des questions, une nouvelle question est envoyée dans le chat</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.check_button</span></code>: bouton <code class="docutils literal notranslate"><span class="pre">VALIDATE</span></code> auquel est liée - déclenchée par un clic gauche - la fonction <code class="docutils literal notranslate"><span class="pre">Game._check</span></code>:</p>
+<ul>
+<li><p>prend en considération le dernier point ajouté sur la carte par l’utilisateur (<em>via l’outil <a class="reference external" href="https://docs.bokeh.org/en/latest/docs/user_guide/interaction/tools.html#pointdrawtool">PointDrawTool</a></em>) et crée un <em>buffer</em> (<em>zone tampon</em>) autour du point de <em>n</em> mètres et vérifie si le point correspondant à la réponse y est contenu</p></li>
+<li><p>si oui, le programme renvoie un message de validation dans le chat</p></li>
+<li><p>si non, il envoie un indice</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.reset_button</span></code>: bouton <code class="docutils literal notranslate"><span class="pre">RESET</span></code> auquel est liée - déclenchée par un clic gauche - la fonction <code class="docutils literal notranslate"><span class="pre">Game._reset</span></code>:</p>
+<ul>
+<li><p>réinitialise le chat et l’indicateur de complétion</p></li>
+<li><p>lance la fonction <code class="docutils literal notranslate"><span class="pre">Game._set</span></code> avec le paramètre <code class="docutils literal notranslate"><span class="pre">reset</span></code> avec la valeur <code class="docutils literal notranslate"><span class="pre">True</span></code> pour réinitialiser certains éléments</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>un widget indiquant la complétion: <code class="docutils literal notranslate"><span class="pre">Game.progress</span></code> qui est un <code class="docutils literal notranslate"><span class="pre">Dial</span></code> (<em><a class="reference external" href="https://panel.holoviz.org/reference/indicators/Dial.html">panel.indicatiors.Dial</a></em>)</p></li>
+</ul>
+</li>
+<li><p>la création et l’initialisation de l’élément <code class="docutils literal notranslate"><span class="pre">main</span></code> du template avec une instance de <a class="reference external" href="https://panel.holoviz.org/reference/layouts/Row.html">panel.Row</a> comprenant:</p>
+<ul>
+<li><p>une <a class="reference external" href="https://docs.bokeh.org/en/latest/docs/reference/plotting/figure.html#figure">figure</a> comprenant une carte basée sur les données open source <a class="reference external" href="https://www.openstreetmap.org/">OpenStreetMap</a> stylisées et fournies par l’outil open source <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Mapnik">MapNik</a>. Nous limitons les <code class="docutils literal notranslate"><span class="pre">ranges</span></code> <code class="docutils literal notranslate"><span class="pre">x</span></code> et <code class="docutils literal notranslate"><span class="pre">y</span></code> pour caler la carte sur la région que nous avons choisie (<em>ces paramètres sont indiqués dans notre fichier YAML de paramètres</em>). Nous y ajoutons un outil aux outils par défaut: <a class="reference external" href="https://docs.bokeh.org/en/latest/docs/user_guide/interaction/tools.html#pointdrawtool">bokeh.models.PointDrawTool</a> pour permettre à l’utilisateur de tracer un point sur la carte.</p></li>
+<li><p>un chat (<em><a class="reference external" href="https://panel.holoviz.org/reference/chat/ChatFeed.html">panel.chat.ChatFeed</a></em>) qui nous sert à afficher des questions, réponses, indices et un histogramme (<em>à la fin d’une partie</em>) qui est une <a class="reference external" href="https://docs.bokeh.org/en/latest/docs/reference/plotting/figure.html#figure">bokeh.plotting.figure</a> comprenant un <a class="reference external" href="https://docs.bokeh.org/en/latest/docs/user_guide/basic/bars.html#ug-basic-bars">vertical bar chart</a>.</p></li>
+</ul>
+</li>
+<li><p>l’initialisation de variables et figures:</p>
+<ul>
+<li><p>un <a class="reference external" href="https://docs.bokeh.org/en/latest/docs/user_guide/basic/scatters.html">Scatter plot</a> accueillant les points tracés par l’utilisateur et s’ajoutant à la carte. Un changement dans les points (<em>ajout</em>) enclenche la fonction <code class="docutils literal notranslate"><span class="pre">Game._get_point</span></code> qui ajoute les points dans un élément <a class="reference external" href="https://docs.bokeh.org/en/latest/docs/user_guide/basic/data.html#creating-a-columndatasource">bokeh.models.ColumDataSource</a>.</p></li>
+<li><p>un <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html">pandas.DataFrame</a> créé à partir du fichier CSV contenant les questions, les réponses, les indices, les wikidata, les URL Wikipedia et les coordonnées géographiques. Ce <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> est transformé en <a class="reference external" href="https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.html">geopandas.GeoDataFrame</a> qui est un <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> avec une dimension géographique puisqu’il contient des <a class="reference external" href="https://shapely.readthedocs.io/en/stable/reference/shapely.Point.html">shapely.geometry.Point</a></p></li>
+</ul>
+</li>
+<li><p>le lancement de certaines fonctions:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Game._set</span></code> déjà évoquée</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Game._get_random</span></code>: sélectionne au hasard un nombre <em><strong>n</strong></em> maximal de questions pour la session de jeu en cours</p></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<div><p><em><strong>Vous pouvez, si vous le souhaitez, aller voir en détail les fonctions et leurs docstrings dans le <a class="reference external" href="https://github.com/thomleysens/Tutoriels_AME/blob/main/tutoriels/game_panel.ipynb">Jupyter Notebook</a></strong></em></p>
+</div></blockquote>
+<p>Penchons nous sur la fin du notebook:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Init Game</span>
+<span class="n">game</span> <span class="o">=</span> <span class="n">Game</span><span class="p">()</span>
+<span class="c1"># Template</span>
+<span class="n">bootstrap</span> <span class="o">=</span> <span class="n">pn</span><span class="o">.</span><span class="n">template</span><span class="o">.</span><span class="n">BootstrapTemplate</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Doctoriales GAME&quot;</span>
+<span class="p">)</span>
+<span class="n">bootstrap</span><span class="o">.</span><span class="n">sidebar_width</span> <span class="o">=</span> <span class="mi">270</span>
+<span class="n">bootstrap</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+    <span class="n">pn</span><span class="o">.</span><span class="n">Row</span><span class="p">(</span>
+        <span class="n">game</span><span class="o">.</span><span class="n">run_button</span><span class="p">,</span>
+        <span class="n">game</span><span class="o">.</span><span class="n">check_button</span><span class="p">,</span>
+        <span class="n">game</span><span class="o">.</span><span class="n">reset_button</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">bootstrap</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">rules</span><span class="p">)</span>
+<span class="n">bootstrap</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">progress</span><span class="p">)</span>
+<span class="n">bootstrap</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">issues</span><span class="p">)</span>
+<span class="n">bootstrap</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">main_board</span><span class="p">)</span>
+<span class="n">bootstrap</span><span class="o">.</span><span class="n">servable</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Expliquons en détail:</p>
+<ul class="simple">
+<li><p>La première ligne initialise la classe (<em>avec la fonction <code class="docutils literal notranslate"><span class="pre">Game.__init__</span></code></em>):</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">game</span> <span class="o">=</span> <span class="n">Game</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Ensuite nous créons un <code class="docutils literal notranslate"><span class="pre">template</span></code> via <a class="reference external" href="https://panel.holoviz.org/reference/templates/Bootstrap.html">panel.template.BootstrapTemplate</a>:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bootstrap</span> <span class="o">=</span> <span class="n">pn</span><span class="o">.</span><span class="n">template</span><span class="o">.</span><span class="n">BootstrapTemplate</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Doctoriales GAME&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Nous paramétrons la largeur en pixels de la <code class="docutils literal notranslate"><span class="pre">sidebar</span></code>:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bootstrap</span><span class="o">.</span><span class="n">sidebar_width</span> <span class="o">=</span> <span class="mi">270</span>
+</pre></div>
+</div>
+<ul>
+<li><p>A cette <code class="docutils literal notranslate"><span class="pre">sidebar</span></code> nous ajoutons des éléments (<em>ceux définis par <code class="docutils literal notranslate"><span class="pre">Game.__init__</span></code></em>):</p>
+<ul>
+<li><p>une ligne de boutons:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bootstrap</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<span class="n">pn</span><span class="o">.</span><span class="n">Row</span><span class="p">(</span>
+        <span class="n">game</span><span class="o">.</span><span class="n">run_button</span><span class="p">,</span>
+        <span class="n">game</span><span class="o">.</span><span class="n">check_button</span><span class="p">,</span>
+        <span class="n">game</span><span class="o">.</span><span class="n">reset_button</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>les règles:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bootstrap</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">rules</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>le widget de progression:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bootstrap</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">progress</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>le texte concernant les issues:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bootstrap</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">issues</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>Enfin, nous intégrons au <code class="docutils literal notranslate"><span class="pre">main</span></code> du <code class="docutils literal notranslate"><span class="pre">template</span></code> la carte et le chat intégrés dans un élément <code class="docutils literal notranslate"><span class="pre">Row</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bootstrap</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">main_board</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Pour terminer nous rendons l’application <code class="docutils literal notranslate"><span class="pre">servable</span></code> (<em>cf <a class="reference external" href="https://panel.holoviz.org/api/panel.__init__.html#panel.__init__.Template.servable">documentation</a> pour plus de détails</em>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bootstrap</span><span class="o">.</span><span class="n">servable</span><span class="p">();</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<section id="pour-aller-plus-loin">
+<h2>Pour aller plus loin<a class="headerlink" href="#pour-aller-plus-loin" title="Permalink to this heading">#</a></h2>
+<section id="instance-locale-avec-panel-serve">
+<h3>Instance locale avec <code class="docutils literal notranslate"><span class="pre">panel</span> <span class="pre">serve</span></code><a class="headerlink" href="#instance-locale-avec-panel-serve" title="Permalink to this heading">#</a></h3>
+<p>Si vous souhaitez lancer l’application en local:</p>
+<ul>
+<li><p>ouvrez une invite de commande dans le sous-dossier <code class="docutils literal notranslate"><span class="pre">tutoriels</span></code>:</p>
+<div class="highlight-cmd notranslate"><div class="highlight"><pre><span></span>conda activate tutoriels_AME
+panel serve game_panel.ipynb
+</pre></div>
+</div>
+</li>
+<li><p>lancez une instance de votre navigateur et entrez l’adresse suivante: <a class="reference external" href="http://localhost:5006/game_panel">http://localhost:5006/game_panel</a></p></li>
+</ul>
+</section>
+<section id="instance-locale-apres-conversion">
+<h3>Instance locale après <a class="reference external" href="https://panel.holoviz.org/how_to/wasm/convert.html">conversion</a><a class="headerlink" href="#instance-locale-apres-conversion" title="Permalink to this heading">#</a></h3>
+<ul>
+<li><p>transformez l’application Panel en ouvrant une invite de commande dans le sous-dossier <code class="docutils literal notranslate"><span class="pre">tutoriels</span></code>:</p>
+<div class="highlight-cmd notranslate"><div class="highlight"><pre><span></span>panel convert game_panel.ipynb --to pyodide-worker --out pyodide
+</pre></div>
+</div>
+</li>
+<li><p>lancez un serveur local</p>
+<div class="highlight-cmd notranslate"><div class="highlight"><pre><span></span>python3 -m http.server
+</pre></div>
+</div>
+</li>
+<li><p>lancez une instance de votre navigateur et entrez l’adresse suivante: <a class="reference external" href="http://localhost:8000/pyodide/game_panel.html">http://localhost:8000/pyodide/game_panel.html</a></p></li>
+</ul>
+</section>
+<section id="liens-utiles">
+<h3>Liens utiles<a class="headerlink" href="#liens-utiles" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://panel.holoviz.org/">Librairie Python Panel</a></p></li>
+<li><p><a class="reference external" href="https://bokeh.org/">Librairie Python Bokeh</a></p></li>
+<li><p><a class="reference external" href="https://panel.holoviz.org/how_to/wasm/convert.html">Convertir une application Panel pour la mise en ligne sur GitHub Pages</a></p></li>
+<li><p><a class="reference external" href="https://www.openstreetmap.org/">OpenStreetMap (<em>données cartographiques open source</em>)</a></p></li>
+<li><p><a class="reference external" href="https://jupyterbook.org/en/stable/start/your-first-book.html">Construire un JupyterBook</a></p></li>
+</ul>
+</section>
+</section>
+<section id="licenses-librairies-python-donnees-api">
+<h2>Licenses librairies Python / Données / API<a class="headerlink" href="#licenses-librairies-python-donnees-api" title="Permalink to this heading">#</a></h2>
+<section id="donnees-api">
+<h3>Données &amp; API<a class="headerlink" href="#donnees-api" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>API / Données</p></th>
+<th class="head text-left"><p>License / Droit d’usage</p></th>
+<th class="head text-left"><p>Documentation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><a class="reference external" href="https://www.openstreetmap.org/">OpenStreetMap</a></p></td>
+<td class="text-left"><p><a class="reference external" href="https://opendatacommons.org/licenses/odbl/">License Open Data Commons Open Database License (ODbL)</a></p></td>
+<td class="text-left"><p><a class="reference external" href="https://wiki.openstreetmap.org/wiki/Main_Page">OpenStreetMap Wiki</a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="librairies-python">
+<h3>Librairies Python<a class="headerlink" href="#librairies-python" title="Permalink to this heading">#</a></h3>
+<p>Voir le <a class="reference external" href="https://github.com/thomleysens/Tutoriels_AME/tree/main#librairies-python-utilis%C3%A9es-dans-ce-d%C3%A9p%C3%B4t">README</a></p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -444,12 +1252,60 @@ document.write(`
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="game_panel.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">DOCTORIALES GAME (<em>PANEL APP</em>)</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enjeux-propositions">Enjeux &amp; Propositions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparation">Préparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#donnees">Données</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#openstreetmap">OpenStreetMap</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#csv">CSV</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-panel">Application Panel</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enjeux">Enjeux</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explications-du-jeu">Explications du jeu</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explications-techniques">Explications techniques</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-aller-plus-loin">Pour aller plus loin</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instance-locale-avec-panel-serve">Instance locale avec <code class="docutils literal notranslate"><span class="pre">panel</span> <span class="pre">serve</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instance-locale-apres-conversion">Instance locale après conversion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#liens-utiles">Liens utiles</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#licenses-librairies-python-donnees-api">Licenses librairies Python / Données / API</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#donnees-api">Données &amp; API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#librairies-python">Librairies Python</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

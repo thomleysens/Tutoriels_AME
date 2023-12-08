@@ -6,3 +6,4 @@ root: intro
 chapters:
 - file: data_management.ipynb
 - file: game_panel.ipynb
+- file: game_panel_tutorial.ipynb
