@@ -15,7 +15,7 @@ async function startApplication() {
   self.pyodide.globals.set("sendPatch", sendPatch);
   console.log("Loaded!");
   await self.pyodide.loadPackage("micropip");
-  const env_spec = ['https://cdn.holoviz.org/panel/wheels/bokeh-3.3.1-py3-none-any.whl', 'https://cdn.holoviz.org/panel/1.3.1/dist/wheels/panel-1.3.1-py3-none-any.whl', 'pyodide-http==0.2.1', 'geopandas', 'numpy', 'shapely', 'utils', 'xyzservices']
+  const env_spec = ['https://cdn.holoviz.org/panel/wheels/bokeh-3.3.1-py3-none-any.whl', 'https://cdn.holoviz.org/panel/1.3.1/dist/wheels/panel-1.3.1-py3-none-any.whl', 'pyodide-http==0.2.1', 'geopandas', 'numpy', 'requests', 'shapely', 'xyzservices', 'yaml']
   for (const pkg of env_spec) {
     let pkg_name;
     if (pkg.endsWith('.whl')) {
@@ -60,6 +60,9 @@ import panel as pn
 import numpy as np
 import time
 import xyzservices.providers as xyz
+import yaml
+import requests
+from collections import namedtuple
 from random import sample
 from bokeh.palettes import Greens5 as palette
 from bokeh.models import (
@@ -72,8 +75,6 @@ from bokeh.models import (
 from bokeh.plotting import figure
 from shapely.geometry import Point
 
-from .utils import load_params
-
 
 #SET PANEL EXTENSION
 pn.extension(notifications=True)
@@ -81,10 +82,73 @@ pn.extension(notifications=True)
 
 palette = list(reversed(palette))
 
-#READ & lOAD YAML PARAMETERS
-filepath = "https://raw.githubusercontent.com/thomleysens/Tutoriels_AME/main/tutoriels/game_params_remote.yml"
-PARAMS = load_params(filepath)
+#Function here and not in a separated module because of Pyodide 
+#conversion restrictions ("The only requirement is that they 
+#import only global modules and packages (relative imports 
+#of other scripts or modules is not supported)" (Source:
+#https://panel.holoviz.org/how_to/wasm/convert.html)
+def load_params(filepath):
+    """
+    Load parameters from local or remote
+    YAML file
 
+    Parameters
+    ----------
+    filepath (str): URL or path to local file
+                    File (local or remote) needs 
+                    to be structured like this:
+                    ranges:
+                        x: [-284221, -277648]
+                        y: [5987515, 5992714]
+                    buffer_value: 200
+                    csv:
+                        file: "game_QA.csv"
+                        sep: ";" 
+                    nb_questions: 5
+    Return
+    ------
+    params (namedtuple)
+    """
+    Params = namedtuple(
+        "Params",
+        [
+            "ranges",
+            "buffer_value",
+            "nb_q",
+            "csv_sep",
+            "csv_file"
+        ]
+    )
+    #Cheap way to check if url
+    #(better methods exist but we want to 
+    #keep it simple)
+    if filepath.lower().startswith(
+        ("http://", "https://")
+    ):
+        content = yaml.safe_load(
+            requests.get(filepath).content
+        )
+    else:
+        with open(filepath, "r") as file:
+            content = yaml.load(
+                file,
+                Loader=yaml.FullLoader,
+            )
+
+    params = Params(
+        content["ranges"],
+        content["buffer_value"],
+        content["nb_questions"],
+        content["csv"]["sep"],
+        content["csv"]["file"]
+    )
+
+    return params
+
+#READ & lOAD YAML PARAMETERS
+filepath = "./game_params.yml" #local
+#filepath = "https://raw.githubusercontent.com/thomleysens/Tutoriels_AME/main/tutoriels/game_params_remote.yml" #remote
+PARAMS = load_params(filepath)
 
 class Game:
     """

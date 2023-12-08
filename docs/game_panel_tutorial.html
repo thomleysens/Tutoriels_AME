@@ -715,6 +715,9 @@ document.write(`
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">xyzservices.providers</span> <span class="k">as</span> <span class="nn">xyz</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">sample</span>
 <span class="kn">from</span> <span class="nn">bokeh.palettes</span> <span class="kn">import</span> <span class="n">Greens5</span> <span class="k">as</span> <span class="n">palette</span>
 <span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="kn">import</span> <span class="p">(</span>
@@ -726,15 +729,8 @@ document.write(`
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="kn">import</span> <span class="n">figure</span>
 <span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span>
-
-<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">load_params</span>
 </pre></div>
 </div>
-<p>Intéressons nous à la dernière ligne:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">load_params</span>
-</pre></div>
-</div>
-<p>Elle est séparée des autres puisque nous importons une fonction que nous avons créée - <em>et non une librairie Python installée dans notre environnement</em> - depuis un module que nous avons développé.</p>
 <p>Il est nécessaire, pour que l’application fonctionne correctement depuis le notebook, d’indiquer à Panel de charger <a class="reference external" href="https://panel.holoviz.org/api/cheatsheet.html#pn-extension">la ou les extensions(s) nécessaire(s)</a>. Les paramètres entre parenthèses peuvent, bien entendu, varier en fonction des besoins:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pn</span><span class="o">.</span><span class="n">extension</span><span class="p">(</span><span class="n">notifications</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -766,17 +762,15 @@ document.write(`
 <li><p>version locale:</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filepath</span> <span class="o">=</span> <span class="s2">&quot;./game_params.yml&quot;</span>
-<span class="n">PARAMS</span> <span class="o">=</span> <span class="n">load_params</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>version en ligne:</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filepath</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/thomleysens/Tutoriels_AME/main/tutoriels/game_params_remote.yml&quot;</span>
-<span class="n">PARAMS</span> <span class="o">=</span> <span class="n">load_params</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">load_params</span></code> est importée depuis <code class="docutils literal notranslate"><span class="pre">utils.py</span></code>. Elle permet de gérer 2 cas pour charger un fichier de paramètres: depuis un fichier local ou depuis une URL.</p>
+<p>La fonction <code class="docutils literal notranslate"><span class="pre">load_params</span></code> permet de gérer 2 cas pour charger un fichier de paramètres: depuis un fichier local ou depuis une URL.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">load_params</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Load parameters from local or remote</span>
@@ -1191,6 +1185,7 @@ panel serve game_panel.ipynb
 <li><p><a class="reference external" href="https://panel.holoviz.org/">Librairie Python Panel</a></p></li>
 <li><p><a class="reference external" href="https://bokeh.org/">Librairie Python Bokeh</a></p></li>
 <li><p><a class="reference external" href="https://panel.holoviz.org/how_to/wasm/convert.html">Convertir une application Panel pour la mise en ligne sur GitHub Pages</a></p></li>
+<li><p><a class="reference external" href="https://pyodide.org/en/stable/usage/faq.html">Pyodide FAQ</a></p></li>
 <li><p><a class="reference external" href="https://www.openstreetmap.org/">OpenStreetMap (<em>données cartographiques open source</em>)</a></p></li>
 <li><p><a class="reference external" href="https://jupyterbook.org/en/stable/start/your-first-book.html">Construire un JupyterBook</a></p></li>
 </ul>
