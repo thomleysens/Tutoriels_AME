@@ -735,6 +735,11 @@ document.write(`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pn</span><span class="o">.</span><span class="n">extension</span><span class="p">(</span><span class="n">notifications</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Nous indiquons également, au préalable, les paramètres généraux du chat que nous allons mettre en place (<em>nous définissons un avatar par défaut pour l’utilisateur <code class="docutils literal notranslate"><span class="pre">Bot</span></code> et nous désactivons les icônes de réaction</em>)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pn</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">ChatMessage</span><span class="o">.</span><span class="n">default_avatars</span><span class="p">[</span><span class="s2">&quot;Bot&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;🤖&quot;</span>
+<span class="n">pn</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">ChatMessage</span><span class="o">.</span><span class="n">show_reaction_icons</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
 <p>L’application repose sur quelques paramètres que nous avons choisi de charger depuis un fichier de paramètres <a class="reference external" href="https://fr.wikipedia.org/wiki/YAML">YAML</a> (<em>dont voici un exemple ci-dessous</em>) afin de ne pas surcharger notre application.</p>
 <p>Le <a class="reference external" href="https://github.com/thomleysens/Tutoriels_AME/blob/main/tutoriels/game_params.yml">fichier YAML</a> se présente ainsi:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ranges</span><span class="p">:</span>

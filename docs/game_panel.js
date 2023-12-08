@@ -82,6 +82,10 @@ pn.extension(notifications=True)
 
 palette = list(reversed(palette))
 
+#SET DEFAULT CHAT PARAMETERS
+pn.chat.ChatMessage.default_avatars["Bot"] = "🤖"
+pn.chat.ChatMessage.show_reaction_icons = False
+
 #Function here and not in a separated module because of Pyodide 
 #conversion restrictions ("The only requirement is that they 
 #import only global modules and packages (relative imports 
@@ -182,7 +186,10 @@ class Game:
             alert_type="primary"
         )
         self.issues = pn.pane.Alert(
-            "If you find bugs or want to propose new features, \
+            "A tutorial on how this game has been developped is available \
+            <a href='https://thomleysens.github.io/Tutoriels_AME/game_panel_tutorial.html' \
+            target='_blank'>here</a> \
+            If you find bugs or want to propose new features, \
             feel free to create a \
             <a href='https://github.com/thomleysens/Tutoriels_AME/issues' \
             target='_blank'>new issue on GitHub</a>",
@@ -368,8 +375,7 @@ class Game:
                             )
                         )
                     ),
-                    "user":"Bot",
-                    "avatar":"🤖"
+                    "user":"Bot"
                 },
                 respond=False
             )
@@ -377,8 +383,7 @@ class Game:
             self.chat_feed.send(
                 {
                     "object":self.hist,
-                    "user":"Bot",
-                    "avatar":"🤖"
+                    "user":"Bot"
                 },
                 respond=False
             )
@@ -395,8 +400,7 @@ class Game:
                         PARAMS.nb_q,
                         self.selection.question
                     ),
-                    "user":"Bot",
-                    "avatar":"🤖"
+                    "user":"Bot"
                 },
                 respond=False
             ) 
@@ -461,8 +465,7 @@ class Game:
                     "object":"No more questions \
                     available. I will reset all. \
                     You will get same questions",
-                    "user":"Bot", 
-                    "avatar":"🤖"
+                    "user":"Bot"
                 },
                 respond=False
             )
@@ -491,8 +494,7 @@ class Game:
             self.chat_feed.send(
                 {
                     "object":"Please place a point",
-                    "user":"Bot", 
-                    "avatar":"🤖"
+                    "user":"Bot"
                 },
                 respond=False
             )
@@ -544,8 +546,7 @@ class Game:
                 self.chat_feed.send(
                     {
                         "object":chat_object,
-                        "user":"Bot", 
-                        "avatar":"🤖"
+                        "user":"Bot"
                     },
                     respond=False
                 )
@@ -558,8 +559,7 @@ class Game:
                         "object":"Nope ! Here's a hint: {}".format(
                             self.selection.hint
                         ),
-                        "user":"Bot", 
-                        "avatar":"🤖"
+                        "user":"Bot"
                     },
                     respond=False
                 )
