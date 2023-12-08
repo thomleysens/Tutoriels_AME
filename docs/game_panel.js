@@ -146,7 +146,8 @@ def load_params(filepath):
     return params
 
 #READ & lOAD YAML PARAMETERS
-filepath = "https://raw.githubusercontent.com/thomleysens/Tutoriels_AME/main/tutoriels/game_params_remote.yml" #remote
+filepath = "./game_params.yml" #local
+#filepath = "https://raw.githubusercontent.com/thomleysens/Tutoriels_AME/main/tutoriels/game_params_remote.yml" #remote
 PARAMS = load_params(filepath)
 
 class Game:
