@@ -72,7 +72,7 @@ from bokeh.models import (
 from bokeh.plotting import figure
 from shapely.geometry import Point
 
-from tutoriels.utils import load_params
+from .utils import load_params
 
 
 #SET PANEL EXTENSION
