@@ -1,4 +1,4 @@
-importScripts("https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js");
+importScripts("https://cdn.jsdelivr.net/pyodide/v0.24.1/pyc/pyodide.js");
 
 function sendPatch(patch, buffers, msg_id) {
   self.postMessage({
@@ -15,7 +15,7 @@ async function startApplication() {
   self.pyodide.globals.set("sendPatch", sendPatch);
   console.log("Loaded!");
   await self.pyodide.loadPackage("micropip");
-  const env_spec = ['https://cdn.holoviz.org/panel/wheels/bokeh-3.3.1-py3-none-any.whl', 'https://cdn.holoviz.org/panel/1.3.2/dist/wheels/panel-1.3.2-py3-none-any.whl', 'pyodide-http==0.2.1', 'geopandas', 'numpy', 'requests', 'shapely', 'xyzservices', 'yaml']
+  const env_spec = ['https://cdn.holoviz.org/panel/wheels/bokeh-3.3.1-py3-none-any.whl', 'https://cdn.holoviz.org/panel/1.3.1/dist/wheels/panel-1.3.1-py3-none-any.whl', 'pyodide-http==0.2.1', 'geopandas', 'numpy', 'shapely', 'utils', 'xyzservices']
   for (const pkg of env_spec) {
     let pkg_name;
     if (pkg.endsWith('.whl')) {
@@ -58,41 +58,32 @@ init_doc()
 import geopandas as gpd
 import panel as pn
 import numpy as np
-import yaml
 import time
 import xyzservices.providers as xyz
-import yaml
-import requests
 from random import sample
 from bokeh.palettes import Greens5 as palette
 from bokeh.models import (
     ColumnDataSource,
-    CustomJS,
     PointDrawTool, 
     Button,
     HoverTool,
     Range1d
 )
-from bokeh.plotting import Column, figure, show
+from bokeh.plotting import figure
 from shapely.geometry import Point
+
+from utils import load_params
 
 
 #SET PANEL EXTENSION
 pn.extension(notifications=True)
 # pn.state.notifications.position = "center-center"
 
+palette = list(reversed(palette))
+
 #READ & lOAD YAML PARAMETERS
-url = "https://raw.githubusercontent.com/thomleysens/Tutoriels_AME/main/tutoriels/game_params.yml"
-r = requests.get(url)
-params = yaml.safe_load(r.content)
-RANGES = params["ranges"]
-BUFFER_VALUE = params["buffer_value"]
-NB_Q = params["nb_questions"]
-CSV_SEP = ";"
-CSV_FILE = "https://raw.githubusercontent.com/thomleysens/Tutoriels_AME/main/tutoriels/game_QA.csv"
-
-
-palette = palette = list(reversed(palette))
+filepath = "https://raw.githubusercontent.com/thomleysens/Tutoriels_AME/main/tutoriels/game_params_remote.yml"
+PARAMS = load_params(filepath)
 
 
 class Game:
@@ -124,7 +115,7 @@ class Game:
             alt='Pan tool' style='width:20px;height:20px'> \
             and wheel zoom \
             <img src='https://docs.bokeh.org/en/latest/_images/WheelZoom.png' \
-            alt='Wheel zoom tool' style='width:20px;height:20px'></p>".format(NB_Q),
+            alt='Wheel zoom tool' style='width:20px;height:20px'></p>".format(PARAMS.nb_q),
             alert_type="primary"
         )
         self.issues = pn.pane.Alert(
@@ -134,27 +125,27 @@ class Game:
             target='_blank'>new issue on GitHub</a>",
             alert_type="warning"
         )
-        self.progress_value = int(100/NB_Q)
+        self.progress_value = int(100/PARAMS.nb_q)
         self.chat_feed = pn.chat.ChatFeed()
         self.map = figure(
             name="map",
-            sizing_mode="scale_both",
-            min_height=600
+            sizing_mode="stretch_both",
+            # min_height=600
         )
         self.map.add_tile(xyz.OpenStreetMap.Mapnik)
         self.map.axis.visible = False
         self.map.grid.visible = False
         self.map.x_range = Range1d(
-            RANGES["x"][0],
-            RANGES["x"][1]
+            PARAMS.ranges["x"][0],
+            PARAMS.ranges["x"][1]
         )
         self.map.y_range = Range1d(
-            RANGES["y"][0],
-            RANGES["y"][1]
+            PARAMS.ranges["y"][0],
+            PARAMS.ranges["y"][1]
         )
         df = gpd.pd.read_csv(
-            CSV_FILE,
-            sep=CSV_SEP,
+            PARAMS.csv_file,
+            sep=PARAMS.csv_sep,
             encoding="utf-8"
         )
         df["geometry"] = df.apply(
@@ -238,9 +229,9 @@ class Game:
             toolbar_location=None, 
             tools="",
             x_range=[
-                str(x+1) for x in range(NB_Q)
+                str(x+1) for x in range(PARAMS.nb_q)
             ],
-            sizing_mode="scale_both",
+            sizing_mode="stretch_both",
             tooltips=tooltips
         )
         self.hist.vbar(
@@ -253,8 +244,8 @@ class Game:
         self.main_board = pn.Row(
             self.map,
             self.chat_feed,
-            sizing_mode="scale_both",
-            min_height=1000 #May change for mobile
+            sizing_mode="stretch_both",
+            # min_height=1000 #May change for mobile
         )
         
         
@@ -295,13 +286,13 @@ class Game:
         """
         Choose a question from the GeoDataFrame
         random selection.
-        Check if NB_Q has been reached:
+        Check if PARAMS.nb_q has been reached:
             - if true => show total time and
             histogram with time/question
             - if false => get and show next
             question
         """
-        if self.index == NB_Q:
+        if self.index == PARAMS.nb_q:
             self.chat_feed.send(
                 {
                     "object":"Game over. Click on \
@@ -338,7 +329,7 @@ class Game:
                 {
                     "object":"Question {}/{}: {}".format(
                         self.index+1,
-                        NB_Q,
+                        PARAMS.nb_q,
                         self.selection.question
                     ),
                     "user":"Bot",
@@ -360,7 +351,7 @@ class Game:
         self.game_set = self.gdf.copy().iloc[
             sample(
                 list(self.gdf.index), 
-                k=NB_Q
+                k=PARAMS.nb_q
             )
         ]
         self.indexes = list(
@@ -379,7 +370,6 @@ class Game:
         Get the point added by user via
         the Point Draw Tool
         """
-        #TODO: CHECK THIS
         self.answer_point = (
             self.source.data["x"].values[0],
             self.source.data["y"].values[0]
@@ -456,7 +446,7 @@ class Game:
                 epsg=3857
             )
             buffer = gdf.geometry.values[-1].buffer(
-                BUFFER_VALUE
+                PARAMS.buffer_value
             )
             if buffer.contains(
                 self.selection.geometry

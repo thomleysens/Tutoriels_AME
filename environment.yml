@@ -7,6 +7,4 @@ dependencies:
   - jupyterlab
   - geopandas
   - bokeh
-  - pip
-  - pip:
-    - jupyter-book
+  - jupyter-book
