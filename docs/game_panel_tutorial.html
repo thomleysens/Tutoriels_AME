@@ -406,7 +406,7 @@ document.write(`
 <div><p><em><strong><a class="reference external" href="https://thomleysens.github.io/Tutoriels_AME/game_panel.html">Lien direct vers le jeu</a></strong></em></p>
 </div></blockquote>
 <blockquote>
-<div><p><em><strong>AVERTISSEMENT: il existe de nombreuses façons d’améliorer le code de notre application. Néanmoins, nous avons souhaité essayer de le rendre le plus simple et le plus accessible possible tout en restant “pythonique”.</strong></em></p>
+<div><p><em><strong>AVERTISSEMENT: il existe de nombreuses façons d’améliorer le code de notre application. Ceci étant dit, nous avons essayé de garder notre code le plus simple et le plus accessible possible tout en restant “pythonique”.</strong></em></p>
 </div></blockquote>
 <table class="table">
 <thead>
@@ -735,8 +735,9 @@ document.write(`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pn</span><span class="o">.</span><span class="n">extension</span><span class="p">(</span><span class="n">notifications</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Nous indiquons également, au préalable, les paramètres généraux du chat que nous allons mettre en place (<em>nous définissons un avatar par défaut pour l’utilisateur <code class="docutils literal notranslate"><span class="pre">Bot</span></code> et nous désactivons les icônes de réaction</em>)</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pn</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">ChatMessage</span><span class="o">.</span><span class="n">default_avatars</span><span class="p">[</span><span class="s2">&quot;Bot&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;🤖&quot;</span>
+<p>Nous indiquons également, au préalable, les paramètres généraux du chat que nous allons mettre en place (<em>nous définissons un avatar par défaut pour l’utilisateur <code class="docutils literal notranslate"><span class="pre">Bot</span></code> et nous désactivons les icônes de réaction après avoir indiqué que nous ne souhaitons aucune icône de réaction en définissant <code class="docutils literal notranslate"><span class="pre">pn.ChatFeed.message_params[&quot;reaction_icons&quot;]</span></code> avec un dictionnaire vide <code class="docutils literal notranslate"><span class="pre">{}</span></code></em>)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pn</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">ChatFeed</span><span class="o">.</span><span class="n">message_params</span><span class="p">[</span><span class="s2">&quot;reaction_icons&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">pn</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">ChatMessage</span><span class="o">.</span><span class="n">default_avatars</span><span class="p">[</span><span class="s2">&quot;Bot&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;🤖&quot;</span>
 <span class="n">pn</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">ChatMessage</span><span class="o">.</span><span class="n">show_reaction_icons</span> <span class="o">=</span> <span class="kc">False</span>
 </pre></div>
 </div>
@@ -849,7 +850,7 @@ document.write(`
 </ul>
 <p>Elle permet de rendre le code plus <em>propre</em> et lisible sans le complexifier à outrance.</p>
 <p>Nous arrivons enfin à notre <a class="reference external" href="https://docs.python.org/fr/3/tutorial/classes.html">classe Python</a> <code class="docutils literal notranslate"><span class="pre">Game</span></code> contenant la création de widgets, figures et fonctions.</p>
-<p>Tout d’abord, nous initialisons les différents widgets, figures, variables dans la fonction <code class="docutils literal notranslate"><span class="pre">__init__</span></code>. Vous noterez qu’elle fait partie de notre classe <code class="docutils literal notranslate"><span class="pre">Game</span></code> ainsi que <code class="docutils literal notranslate"><span class="pre">self</span></code> dans les arguments: cela indique que cette fonction appartient à la classe <code class="docutils literal notranslate"><span class="pre">Game</span></code> et qu’elle peut être appelée par d’autres fonctions dans la même classe, par exemple. Il en va de même pour les variables commençant par <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
+<p>Tout d’abord, nous initialisons les différents widgets, figures, variables dans la fonction <code class="docutils literal notranslate"><span class="pre">__init__</span></code>. Vous noterez qu’elle fait partie de notre classe <code class="docutils literal notranslate"><span class="pre">Game</span></code> ainsi que <code class="docutils literal notranslate"><span class="pre">self</span></code> dans les arguments: cela indique que cette fonction fait partie de la classe <code class="docutils literal notranslate"><span class="pre">Game</span></code> (<em>il en va de même pour les autres fonctions comprises dans cette classe et ayant pour premier argument <code class="docutils literal notranslate"><span class="pre">self</span></code></em>). Il convient de noter que les variables commençant par <code class="docutils literal notranslate"><span class="pre">self.</span></code> sont disponibles dans toutes les fonctions de la classe.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Init figures and widgets:</span>
@@ -876,7 +877,10 @@ document.write(`
             <span class="n">alert_type</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">issues</span> <span class="o">=</span> <span class="n">pn</span><span class="o">.</span><span class="n">pane</span><span class="o">.</span><span class="n">Alert</span><span class="p">(</span>
-            <span class="s2">&quot;If you find bugs or want to propose new features, </span><span class="se">\</span>
+            <span class="s2">&quot;A tutorial on how this game has been developped is available </span><span class="se">\</span>
+<span class="s2">            &lt;a href=&#39;https://thomleysens.github.io/Tutoriels_AME/game_panel_tutorial.html&#39; </span><span class="se">\</span>
+<span class="s2">            target=&#39;_blank&#39;&gt;here&lt;/a&gt; </span><span class="se">\</span>
+<span class="s2">            If you find bugs or want to propose new features, </span><span class="se">\</span>
 <span class="s2">            feel free to create a </span><span class="se">\</span>
 <span class="s2">            &lt;a href=&#39;https://github.com/thomleysens/Tutoriels_AME/issues&#39; </span><span class="se">\</span>
 <span class="s2">            target=&#39;_blank&#39;&gt;new issue on GitHub&lt;/a&gt;&quot;</span><span class="p">,</span>
@@ -1028,7 +1032,7 @@ document.write(`
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">self.check_button</span></code>: bouton <code class="docutils literal notranslate"><span class="pre">VALIDATE</span></code> auquel est liée - déclenchée par un clic gauche - la fonction <code class="docutils literal notranslate"><span class="pre">Game._check</span></code>:</p>
 <ul>
-<li><p>prend en considération le dernier point ajouté sur la carte par l’utilisateur (<em>via l’outil <a class="reference external" href="https://docs.bokeh.org/en/latest/docs/user_guide/interaction/tools.html#pointdrawtool">PointDrawTool</a></em>) et crée un <em>buffer</em> (<em>zone tampon</em>) autour du point de <em>n</em> mètres et vérifie si le point correspondant à la réponse y est contenu</p></li>
+<li><p>prend en considération le dernier point ajouté sur la carte par l’utilisateur (<em>via l’outil <a class="reference external" href="https://docs.bokeh.org/en/latest/docs/user_guide/interaction/tools.html#pointdrawtool">PointDrawTool</a></em>) et crée un <em>buffer</em> (<em>zone tampon</em>) - dont la taille est déterminée par le paramètre <code class="docutils literal notranslate"><span class="pre">buffer_value</span></code> dans notre fichier YAML - autour du point de <em>n</em> mètres et vérifie si le point correspondant à la réponse y est contenu</p></li>
 <li><p>si oui, le programme renvoie un message de validation dans le chat</p></li>
 <li><p>si non, il envoie un indice</p></li>
 </ul>
@@ -1059,7 +1063,7 @@ document.write(`
 <li><p>le lancement de certaines fonctions:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">Game._set</span></code> déjà évoquée</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Game._get_random</span></code>: sélectionne au hasard un nombre <em><strong>n</strong></em> maximal de questions pour la session de jeu en cours</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Game._get_random</span></code>: sélectionne au hasard un nombre <em><strong>n</strong></em> maximal de questions (<em>déterminé dans notre fichier de paramètres YAML =&gt; <code class="docutils literal notranslate"><span class="pre">nb_questions</span></code></em>) pour la session de jeu en cours</p></li>
 </ul>
 </li>
 </ul>
@@ -1176,6 +1180,7 @@ panel serve game_panel.ipynb
 </pre></div>
 </div>
 </li>
+<li><p>dans le fichier <code class="docutils literal notranslate"><span class="pre">game_panel.js</span></code>, supprimez la ligne <code class="docutils literal notranslate"><span class="pre">filepath</span> <span class="pre">=</span> <span class="pre">&quot;./game_params.yml&quot;</span> <span class="pre">#local</span></code> et enlevez le <code class="docutils literal notranslate"><span class="pre">#</span></code> au début de la ligne suivante <code class="docutils literal notranslate"><span class="pre">#filepath</span> <span class="pre">=</span> <span class="pre">&quot;https://raw.githubusercontent.com/thomleysens/Tutoriels_AME/main/tutoriels/game_params_remote.yml&quot;</span> <span class="pre">#remote</span></code> afin que celle-ci ne soit plus considérée comme un commentaire</p></li>
 <li><p>lancez un serveur local</p>
 <div class="highlight-cmd notranslate"><div class="highlight"><pre><span></span>python3 -m http.server
 </pre></div>
